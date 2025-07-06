@@ -46,7 +46,8 @@ public class AuthFilter implements GlobalFilter, Ordered {
         // 主页接口、图书接口正则匹配
         boolean indexMatch = Pattern.matches("/index[^\\s]*", path);
         boolean bookMatch = Pattern.matches("/book/[^\\s]*", path);
-
+        whiteList.add("/account/user/login");
+        whiteList.add("/account/user/register");
         // 白名单接口、开放接口放行
         if (bookMatch || indexMatch || whiteList.contains(path)) {
             return chain.filter(exchange);
