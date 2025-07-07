@@ -5,6 +5,29 @@ spring:
   application:
     # 服务逻辑名称
     name: light-reading-cloud-gateway
+  #---- redis配置  ----#
+  redis:
+    database: 0
+    host: 39.108.170.39
+    port: 6379
+    password:
+    jedis:
+      pool:
+        #最大连接数据库连接数,设 0 为没有限制
+        max-active: 30
+        #最大等待连接中的数量,设 0 为没有限制
+        max-idle: 10
+        #最大建立连接等待时间。如果超过此时间将接到异常。设为-1表示无限制。
+        max-wait: -1ms
+        #最小等待连接中的数量,设 0 为没有限制
+        min-idle: 0
+      lettuce:
+        pool:
+          max-active: 10
+          max-idle: 5
+          max-wait: -1ms
+          min-idle: 0
+        shutdown-timeout: 100ms
   cloud:
     gateway:
       discovery:
@@ -81,3 +104,7 @@ hystrix:
       coreSize: 20 #并发执行的最大线程数，默认10
       maxQueueSize: 1000 #BlockingQueue的最大队列数，默认值-1
       queueSizeRejectionThreshold: 400
+
+system:
+  properties:
+    whitelist: /account/user/login,/account/user/register
